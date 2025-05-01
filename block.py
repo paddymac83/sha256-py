@@ -1,8 +1,9 @@
 import hashlib
 
 class Block():
-    def __init__(self, data):
+    def __init__(self, data, previous_block):
         self.data = data
+        self.previous_hash = previous_block.hash
         self.nonce = 0
         self.hash = hashlib.sha256()
 
@@ -14,5 +15,5 @@ class Block():
             self.hash.update(str(self).encode("utf-8"))
     
     def __str__(self):
-        return "{}{}".format(self.data, self.nonce)
+        return "{}{}{}".format(self.previous_block, self.data, self.nonce)
 
